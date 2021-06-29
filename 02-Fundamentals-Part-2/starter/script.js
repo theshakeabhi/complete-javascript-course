@@ -304,23 +304,213 @@ console.log('\n');
 //10 Object Methods
 //=============
 console.log('10 Object Methods');
+const abhi = {
+	firstName: 'Abhishek',
+	lastName: 'Chandrasenan',
+	birthYear: 1997,
+	Job: 'Software Engineer',
+	friends: ['Vyshak', 'Ebi', 'Sujith'],
+	hasDriverLicense: true,
+
+	// this is the reason we studies function declaration and function expression, and in object, as key value pairs we can use 'expression' in place of values so we can achieve this
+	calAge: function (birthYear) {
+		return 2021 - birthYear;
+	},
+
+	// now in the calcAge we have some more things we can do because it doesn't follow the DRY princpiple.
+	// therefore we are going to use 'this' keyword.
+	// this keyword basically points to the object it is refering to.
+	calcAgeThis: function () {
+		console.log(this);
+		return 2021 - this.birthYear; // the reason why we are not using 'abhi.birthyear' is because if we change the name of the object we will have to change it here also and that is not recommended
+	},
+
+	calAgeThisReturn: function () {
+		this.age = 2021 - this.birthYear; // using this.newName we stored the value in the object
+		return this.age;
+	},
+
+	//this is the challenge method
+	challengeString: function () {
+		const answer = `${this.firstName} is a ${this.calAgeThisReturn()}-year old ${
+			this.Job
+		}, and he ${this.hasDriverLicense ? 'has a' : 'does not have a'} drivers license.`;
+		return answer;
+	},
+};
+
+//this is as same as function in line 316
+// const calcAge = function (birthYear) {
+// 	return 2021 - birthYear;
+// };
+
+console.log('Simple . :', abhi.calAge(1997)); //you can access it the same way you access any property of the object
+console.log('Simple [] :', abhi['calAge'](1997)); // we are using [] notation, it is weird but you will get used to it.
+
+console.log('Normal function property/method:', abhi.calcAgeThis()); //here we are not passing the value becuase we are already using it in the function using this.
+
+console.log('Redundant call that uses processing power:', abhi.calcAgeThis());
+console.log('Redundant call that uses processing power:', abhi.calcAgeThis());
+console.log('Redundant call that uses processing power:', abhi.calcAgeThis());
+// so basically you can do this, but in bigger programs it might be time consuming and it might take processing power, therefore in the function create a new property using this.newPropName and retuen that.
+
+console.log('Value from function call:', abhi.calAgeThisReturn());
+console.log('Value from created from function: ', abhi.age); //we just used the value that we created from the previous function.
 
 console.log('\n');
 
-// //
-// //=============
-// console.log('');
+//CHALLENGE
+//=============
+console.log('CHALLENGE');
+console.log(
+	"Create a method that would output the string dynamically: Abhishek is a 24-year old SOftware Engineer, and he has a/not driver's license"
+);
 
-// console.log('\n');
+console.log('Answer:', abhi.challengeString());
 
-// //
-// //=============
-// console.log('');
+console.log('\n');
 
-// console.log('\n');
+// 11 Itreations Loops
+//=============
+console.log('11 Itreations Loops');
+console.log('for loop');
 
-// //
-// //=============
-// console.log('');
+console.log('without loop, you will have to type it 5 times, check code, and it breaks DRY rule');
+console.log('You have printted this 1 time');
+console.log('You have printted this 2 time');
+console.log('You have printted this 3 time');
+console.log('You have printted this 4 time');
+console.log('You have printted this 5 time');
 
-// console.log('\n');
+console.log("using for loop it's so much easier");
+for (let rep = 1; rep <= 5; rep++) {
+	console.log('You have printted this 1 time');
+}
+
+for (let rep = 1; rep <= 5; rep++) {
+	console.log(`You have printted this ${rep} time`);
+}
+
+console.log('\n');
+
+//12 Looping through arrays, breaking and continuing
+//=============
+console.log('12 Looping through arrays, breaking and continuing');
+
+const abhiArrayLoop = [
+	'Abhishek',
+	'Chandrasenan',
+	2021 - 1997,
+	'Software Engineer',
+	['Vyshak', 'Ebi', 'Sujith'],
+];
+
+// empty array initialisation
+const types = [];
+const typesNew = new Array();
+
+console.log('Array looped through for loop:');
+for (let i = 0; i < abhiArrayLoop.length; i++) {
+	//reading array
+	console.log(abhiArrayLoop[i], typeof abhiArrayLoop[i]);
+
+	//filling the array
+	types[i] = typeof abhiArrayLoop[i];
+	typesNew.push(typeof abhiArrayLoop[i]);
+}
+
+console.log('init with [], and normal assignment:', types);
+console.log("init with 'new Array' and added with .push():", typesNew);
+
+const yearsNew = [];
+for (let i = 1991; i < 2000; i = i + 3) {
+	yearsNew.push(i);
+}
+console.log('Years added by loop:', yearsNew);
+
+const ageNew = new Array();
+for (let i = 0; i < yearsNew.length; i++) {
+	ageNew.push(2021 - yearsNew[i]);
+}
+console.log('Age calculated and pushed by loop:', ageNew);
+
+//continue and break statements
+console.log('\nContinue and Break statements');
+
+console.log(`Continue: they skip the current itreation and jump
+break: it goes out of the loop
+`);
+
+console.log('-----print other than strings(continue statement)------');
+for (let i = 0; i < abhiArrayLoop.length; i++) {
+	if (typeof abhiArrayLoop[i] === 'string') {
+		console.log("skipped becauue it's strinng".toUpperCase());
+		continue;
+	}
+	console.log(abhiArrayLoop[i], typeof abhiArrayLoop[i]);
+}
+
+console.log('\n-----break when number type is encounetred(break statement)------');
+for (let i = 0; i < abhiArrayLoop.length; i++) {
+	if (typeof abhiArrayLoop[i] === 'number') {
+		break;
+	}
+	console.log(abhiArrayLoop[i], typeof abhiArrayLoop[i]);
+}
+
+console.log('\n');
+
+//13 Looping backwards and lopp inside loop
+//=============
+console.log('13 Looping backwards and lopp inside loop');
+
+console.log('BACKWARDS LOOP');
+console.log(abhiArrayLoop);
+console.log('Array printing backwards:');
+for (let i = abhiArrayLoop.length - 1; i >= 0; i--) {
+	console.log(i, abhiArrayLoop[i]);
+}
+
+console.log('LOOP INSIDE LOOP');
+for (let excercise = 1; excercise <= 3; excercise++) {
+	console.log(`This is excercise ${excercise}`);
+	for (let reps = 1; reps <= 2; reps++) {
+		console.log(`\tYou have done this excercise ${excercise}, ${reps} times`);
+	}
+}
+
+console.log('\n');
+
+//14 while loop
+//=============
+console.log('14 while loop');
+
+let rep = 1;
+while (rep <= 4) {
+	console.log('While loop doing the rep:', rep);
+	rep++;
+}
+
+console.log('While loop is normally used when a loop doesnt depend on a counter');
+
+let diceNum = Math.trunc(Math.random() * 6) + 1;
+while (diceNum !== 6) {
+	console.log(`You rolled ${diceNum}`);
+	diceNum = Math.trunc(Math.random() * 6) + 1;
+	if (diceNum === 6) {
+		console.log('Loop is about to end.....');
+	}
+}
+
+/*
+console.log(Math.trunc(Math.random() * 6));
+it would only give values from 0 to 5 as Math.random()
+makes values from 0 to 1, excluding 0 and 1 so everything
+from 0.00000001 to 0.99999. And because of the same reason
+Math.random() * 6 would give only max to 5.___ ish values
+and Math.trunc() retuens the integreal part of the decimal
+so basically it would only give 0 to 5 so in order to get
+1 to 6 Math.trunc(Math.random() * 6) + 1 is important.
+*/
+
+console.log('\n');
