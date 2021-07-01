@@ -58,6 +58,8 @@ for (let i = 0; i < btnOpenModal.length; i++) {
 
 btnCloseModal.addEventListener('click', closeModal);
 
+overlay.addEventListener('click', closeModal);
+
 /* 
 //////////IMPORTANT////////////
 The reason we are not adding () to openModal and closeModal is basically
